@@ -1,0 +1,4 @@
+node_modules/
+data/.session-secret
+.env
+npm-debug.log*

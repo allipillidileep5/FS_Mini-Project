@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "name": "General Enquiry",
+    "prefix": "A"
+  },
+  {
+    "id": "2",
+    "name": "Banking Services",
+    "prefix": "B"
+  },
+  {
+    "id": "3",
+    "name": "Admissions",
+    "prefix": "C"
+  },
+  {
+    "id": "4",
+    "name": "Customer Support",
+    "prefix": "D"
+  }
+]

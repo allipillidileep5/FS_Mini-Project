@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Login - QueueFlow</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <div class="logo"><div class="logo-box">Q</div><div><h1>QueueFlow</h1><small>Admin Authentication</small></div></div>
+  <nav><a href="index.html">Home</a><a class="active" href="login.html">Admin Login</a></nav>
+</header>
+<main class="token-page">
+  <section class="card token-card">
+    <p class="token-label">ADMIN ACCESS</p>
+    <h1>Sign in to QueueFlow</h1>
+    <p>Admin credentials are required to access queue management and service administration.</p>
+    <form id="loginForm" style="max-width:480px;margin:24px auto 0;text-align:left">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" autocomplete="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn primary" id="loginBtn" type="submit">Sign In</button>
+      <p id="errorMessage" class="error-message"></p>
+    </form>
+  </section>
+</main>
+<script>
+const form=document.getElementById("loginForm");
+const error=document.getElementById("errorMessage");
+const btn=document.getElementById("loginBtn");
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  error.textContent="";
+  btn.disabled=true;
+  btn.textContent="Signing in...";
+  try{
+    const r=await fetch("/api/auth/login",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        username:document.getElementById("username").value,
+        password:document.getElementById("password").value
+      })
+    });
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.message||"Login failed");
+    location.href="/admin.html";
+  }catch(err){
+    error.textContent=err.message;
+    btn.disabled=false;
+    btn.textContent="Sign In";
+  }
+});
+</script>
+</body>
+</html>
